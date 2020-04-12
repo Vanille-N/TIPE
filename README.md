@@ -2,7 +2,7 @@
 Simulation de la circulation thermohaline
 
 Villani Neven,
-Modélisation informatique du modèle de Stommel.
+Modélisation informatique interactive du modèle océanique à compartiments de Stommel.
 
 À compiler avec Qt pour C++.
 
