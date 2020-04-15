@@ -9,11 +9,12 @@
 #include <QString>
 #include <QLabel>
 #include "state.h"
+#include "metavars.h"
 
 class StateEditor : public QWidget {
     Q_OBJECT
 public:
-    StateEditor(State *, loc, QString, QWidget *) ;
+    StateEditor(QVector<State *> &, loc, QString, QWidget *) ;
 
 public slots:
     void refresh () ;
@@ -58,6 +59,6 @@ private:
     QLCDNumber * m_lcdT ;
     QWidget * m_parent ;
     QString m_param ;
-    State * m_Stt ;
+    QVector<State *> m_Stt ;
     loc m_l ;
 };

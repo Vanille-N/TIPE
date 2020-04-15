@@ -1,7 +1,7 @@
 #include "constdisplayer.h"
 
 ConstDisplayer::ConstDisplayer (QString label, QWidget * parent, Const * Cst, Const * Aim, cst c, QString legend) {
-    setFixedSize(85, 90) ;
+    setFixedSize(70, 70) ;
     m_parent = parent ;
     m_Cst = Cst ;
     m_Aim = Aim ;
@@ -26,7 +26,7 @@ ConstDisplayer::ConstDisplayer (QString label, QWidget * parent, Const * Cst, Co
 
     m_varname = new QLabel(m_label) ;
     m_varname->setAlignment(Qt::AlignCenter) ;
-    m_varname->setFont(QFont("helvetica", 20)) ;
+    m_varname->setFont(QFont("ubuntu", 15)) ;
 
     m_vbox->addWidget(m_lcd) ;
     m_vbox->addWidget(m_varname) ;
@@ -34,13 +34,19 @@ ConstDisplayer::ConstDisplayer (QString label, QWidget * parent, Const * Cst, Co
     setLayout(m_vbox) ;
 
     switch (m_c) {
-        case Te: case Tp: setStyleSheet("background-color: lightblue;") ; break ;
-        case Se: case Sp: setStyleSheet("background-color: lightgreen;") ; break ;
-        case dt: case tauS: case tauT: setStyleSheet("background-color: pink;") ; break ;
-        case lambda: case M0: setStyleSheet("background-color: orange;") ; break ;
+        case Te:
+        case Tp: setStyleSheet("background-color: lightblue;") ; break ;
+        case Se:
+        case Sp: setStyleSheet("background-color: lightgreen;") ; break ;
+        case dt:
+        case tauS:
+        case tauT: setStyleSheet("background-color: pink;") ; break ;
+        case lambda:
+        case M0: setStyleSheet("background-color: orange;") ; break ;
     }
 
     connect(this, SIGNAL(clicked()), this, SLOT(launchEditor())) ;
+    connect(m_parent, SIGNAL(closed()), m_ed, SLOT(close())) ;
 }
 
 void ConstDisplayer::refresh () {
@@ -48,6 +54,7 @@ void ConstDisplayer::refresh () {
 }
 
 void ConstDisplayer::launchEditor () {
+    m_ed->close() ;
     m_ed->show() ;
 }
 

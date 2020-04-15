@@ -1,6 +1,7 @@
 #include "consteditor.h"
 
 ConstEditor::ConstEditor(Const * Aim, cst c, QString param, QWidget * parent) {
+    move(0, 800) ;
     m_Aim = Aim ;
     m_c = c ;
     m_parent = parent ;
@@ -88,6 +89,10 @@ void ConstEditor::decrHth () {
 
 void ConstEditor::chval (double step) {
     double oom = m_Aim->orderOfMagnitude(m_c) ;
+    double curr = m_Aim->get(m_c) ;
+    if ((curr + oom*step)/curr < 0.001) {
+        oom /= 10 ;
+    }
     m_Aim->set(m_c, oom*step + m_Aim->get(m_c)) ;
     m_lcd->display(m_Aim->get(m_c)) ;
 }

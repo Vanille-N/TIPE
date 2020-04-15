@@ -14,15 +14,15 @@ public:
     void read (QString) ;
     void write (QString) ;
     double getAlpha () ;
-    double getGamma () ;
+    double getBeta () ;
     double getDelta () ;
-    double getTrans () ;
+    double getPhiAdim () ;
     double getSig (loc) ;
     double getPhi () ;
     double getS (loc) ;
     double getT (loc) ;
     void setAlpha (double) ;
-    void setGamma (double) ;
+    void setBeta (double) ;
     void setDelta (double) ;
     void setTrans (double) ;
     void setSig (loc, double) ;
@@ -33,7 +33,7 @@ public:
 private:
     double transport ;
     double alpha ;
-    double gamma ;
+    double beta ;
     double delta ;
     double phi ;
     double Sig [2] ;

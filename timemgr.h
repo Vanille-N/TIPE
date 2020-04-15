@@ -12,6 +12,9 @@ class TimeMgr : public QPushButton {
 public:
     TimeMgr (QWidget * parent, Const * Cst) ;
     void tick () ;
+    double clock () ;
+signals:
+    void timeout () ;
 
 private:
     QVBoxLayout * m_vbox ;

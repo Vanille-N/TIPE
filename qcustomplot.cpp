@@ -22929,25 +22929,25 @@ bool QCPCurve::getTraverse(double prevKey, double prevValue, double key, double 
     intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(keyMaxPx, valuePx) : QPointF(valuePx, keyMaxPx));
   } else // line is skewed
   {
-    double gamma;
+    double beta;
     double keyPerValuePx = (keyPx-prevKeyPx)/(valuePx-prevValuePx);
     // check top of rect:
-    gamma = prevKeyPx + (valueMaxPx-prevValuePx)*keyPerValuePx;
-    if (gamma >= qMin(keyMinPx, keyMaxPx) && gamma <= qMax(keyMinPx, keyMaxPx)) // qMin/qMax necessary since axes may be reversed
-      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(gamma, valueMaxPx) : QPointF(valueMaxPx, gamma));
+    beta = prevKeyPx + (valueMaxPx-prevValuePx)*keyPerValuePx;
+    if (beta >= qMin(keyMinPx, keyMaxPx) && beta <= qMax(keyMinPx, keyMaxPx)) // qMin/qMax necessary since axes may be reversed
+      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(beta, valueMaxPx) : QPointF(valueMaxPx, beta));
     // check bottom of rect:
-    gamma = prevKeyPx + (valueMinPx-prevValuePx)*keyPerValuePx;
-    if (gamma >= qMin(keyMinPx, keyMaxPx) && gamma <= qMax(keyMinPx, keyMaxPx)) // qMin/qMax necessary since axes may be reversed
-      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(gamma, valueMinPx) : QPointF(valueMinPx, gamma));
+    beta = prevKeyPx + (valueMinPx-prevValuePx)*keyPerValuePx;
+    if (beta >= qMin(keyMinPx, keyMaxPx) && beta <= qMax(keyMinPx, keyMaxPx)) // qMin/qMax necessary since axes may be reversed
+      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(beta, valueMinPx) : QPointF(valueMinPx, beta));
     const double valuePerKeyPx = 1.0/keyPerValuePx;
     // check left of rect:
-    gamma = prevValuePx + (keyMinPx-prevKeyPx)*valuePerKeyPx;
-    if (gamma >= qMin(valueMinPx, valueMaxPx) && gamma <= qMax(valueMinPx, valueMaxPx)) // qMin/qMax necessary since axes may be reversed
-      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(keyMinPx, gamma) : QPointF(gamma, keyMinPx));
+    beta = prevValuePx + (keyMinPx-prevKeyPx)*valuePerKeyPx;
+    if (beta >= qMin(valueMinPx, valueMaxPx) && beta <= qMax(valueMinPx, valueMaxPx)) // qMin/qMax necessary since axes may be reversed
+      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(keyMinPx, beta) : QPointF(beta, keyMinPx));
     // check right of rect:
-    gamma = prevValuePx + (keyMaxPx-prevKeyPx)*valuePerKeyPx;
-    if (gamma >= qMin(valueMinPx, valueMaxPx) && gamma <= qMax(valueMinPx, valueMaxPx)) // qMin/qMax necessary since axes may be reversed
-      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(keyMaxPx, gamma) : QPointF(gamma, keyMaxPx));
+    beta = prevValuePx + (keyMaxPx-prevKeyPx)*valuePerKeyPx;
+    if (beta >= qMin(valueMinPx, valueMaxPx) && beta <= qMax(valueMinPx, valueMaxPx)) // qMin/qMax necessary since axes may be reversed
+      intersections.append(mKeyAxis->orientation() == Qt::Horizontal ? QPointF(keyMaxPx, beta) : QPointF(beta, keyMaxPx));
   }
 
   // handle cases where found points isn't exactly 2:
@@ -28152,7 +28152,7 @@ void QCPItemStraightLine::draw(QCPPainter *painter)
 QLineF QCPItemStraightLine::getRectClippedStraightLine(const QCPVector2D &base, const QCPVector2D &vec, const QRect &rect) const
 {
   double bx, by;
-  double gamma;
+  double beta;
   QLineF result;
   if (vec.x() == 0 && vec.y() == 0)
     return result;
@@ -28161,44 +28161,44 @@ QLineF QCPItemStraightLine::getRectClippedStraightLine(const QCPVector2D &base, 
     // check top of rect:
     bx = rect.left();
     by = rect.top();
-    gamma = base.x()-bx + (by-base.y())*vec.x()/vec.y();
-    if (gamma >= 0 && gamma <= rect.width())
-      result.setLine(bx+gamma, rect.top(), bx+gamma, rect.bottom()); // no need to check bottom because we know line is vertical
+    beta = base.x()-bx + (by-base.y())*vec.x()/vec.y();
+    if (beta >= 0 && beta <= rect.width())
+      result.setLine(bx+beta, rect.top(), bx+beta, rect.bottom()); // no need to check bottom because we know line is vertical
   } else if (qFuzzyIsNull(vec.y())) // line is horizontal
   {
     // check left of rect:
     bx = rect.left();
     by = rect.top();
-    gamma = base.y()-by + (bx-base.x())*vec.y()/vec.x();
-    if (gamma >= 0 && gamma <= rect.height())
-      result.setLine(rect.left(), by+gamma, rect.right(), by+gamma); // no need to check right because we know line is horizontal
+    beta = base.y()-by + (bx-base.x())*vec.y()/vec.x();
+    if (beta >= 0 && beta <= rect.height())
+      result.setLine(rect.left(), by+beta, rect.right(), by+beta); // no need to check right because we know line is horizontal
   } else // line is skewed
   {
     QList<QCPVector2D> pointVectors;
     // check top of rect:
     bx = rect.left();
     by = rect.top();
-    gamma = base.x()-bx + (by-base.y())*vec.x()/vec.y();
-    if (gamma >= 0 && gamma <= rect.width())
-      pointVectors.append(QCPVector2D(bx+gamma, by));
+    beta = base.x()-bx + (by-base.y())*vec.x()/vec.y();
+    if (beta >= 0 && beta <= rect.width())
+      pointVectors.append(QCPVector2D(bx+beta, by));
     // check bottom of rect:
     bx = rect.left();
     by = rect.bottom();
-    gamma = base.x()-bx + (by-base.y())*vec.x()/vec.y();
-    if (gamma >= 0 && gamma <= rect.width())
-      pointVectors.append(QCPVector2D(bx+gamma, by));
+    beta = base.x()-bx + (by-base.y())*vec.x()/vec.y();
+    if (beta >= 0 && beta <= rect.width())
+      pointVectors.append(QCPVector2D(bx+beta, by));
     // check left of rect:
     bx = rect.left();
     by = rect.top();
-    gamma = base.y()-by + (bx-base.x())*vec.y()/vec.x();
-    if (gamma >= 0 && gamma <= rect.height())
-      pointVectors.append(QCPVector2D(bx, by+gamma));
+    beta = base.y()-by + (bx-base.x())*vec.y()/vec.x();
+    if (beta >= 0 && beta <= rect.height())
+      pointVectors.append(QCPVector2D(bx, by+beta));
     // check right of rect:
     bx = rect.right();
     by = rect.top();
-    gamma = base.y()-by + (bx-base.x())*vec.y()/vec.x();
-    if (gamma >= 0 && gamma <= rect.height())
-      pointVectors.append(QCPVector2D(bx, by+gamma));
+    beta = base.y()-by + (bx-base.x())*vec.y()/vec.x();
+    if (beta >= 0 && beta <= rect.height())
+      pointVectors.append(QCPVector2D(bx, by+beta));
 
     // evaluate points:
     if (pointVectors.size() == 2)
@@ -28376,7 +28376,7 @@ QLineF QCPItemLine::getRectClippedLine(const QCPVector2D &start, const QCPVector
   QCPVector2D base = start;
   QCPVector2D vec = end-start;
   double bx, by;
-  double gamma, mu;
+  double beta, mu;
   QLineF result;
   QList<QCPVector2D> pointVectors;
 
@@ -28388,9 +28388,9 @@ QLineF QCPItemLine::getRectClippedLine(const QCPVector2D &start, const QCPVector
     mu = (by-base.y())/vec.y();
     if (mu >= 0 && mu <= 1)
     {
-      gamma = base.x()-bx + mu*vec.x();
-      if (gamma >= 0 && gamma <= rect.width())
-        pointVectors.append(QCPVector2D(bx+gamma, by));
+      beta = base.x()-bx + mu*vec.x();
+      if (beta >= 0 && beta <= rect.width())
+        pointVectors.append(QCPVector2D(bx+beta, by));
     }
     // check bottom of rect:
     bx = rect.left();
@@ -28398,9 +28398,9 @@ QLineF QCPItemLine::getRectClippedLine(const QCPVector2D &start, const QCPVector
     mu = (by-base.y())/vec.y();
     if (mu >= 0 && mu <= 1)
     {
-      gamma = base.x()-bx + mu*vec.x();
-      if (gamma >= 0 && gamma <= rect.width())
-        pointVectors.append(QCPVector2D(bx+gamma, by));
+      beta = base.x()-bx + mu*vec.x();
+      if (beta >= 0 && beta <= rect.width())
+        pointVectors.append(QCPVector2D(bx+beta, by));
     }
   }
   if (!qFuzzyIsNull(vec.x())) // line is not vertical
@@ -28411,9 +28411,9 @@ QLineF QCPItemLine::getRectClippedLine(const QCPVector2D &start, const QCPVector
     mu = (bx-base.x())/vec.x();
     if (mu >= 0 && mu <= 1)
     {
-      gamma = base.y()-by + mu*vec.y();
-      if (gamma >= 0 && gamma <= rect.height())
-        pointVectors.append(QCPVector2D(bx, by+gamma));
+      beta = base.y()-by + mu*vec.y();
+      if (beta >= 0 && beta <= rect.height())
+        pointVectors.append(QCPVector2D(bx, by+beta));
     }
     // check right of rect:
     bx = rect.right();
@@ -28421,9 +28421,9 @@ QLineF QCPItemLine::getRectClippedLine(const QCPVector2D &start, const QCPVector
     mu = (bx-base.x())/vec.x();
     if (mu >= 0 && mu <= 1)
     {
-      gamma = base.y()-by + mu*vec.y();
-      if (gamma >= 0 && gamma <= rect.height())
-        pointVectors.append(QCPVector2D(bx, by+gamma));
+      beta = base.y()-by + mu*vec.y();
+      if (beta >= 0 && beta <= rect.height())
+        pointVectors.append(QCPVector2D(bx, by+beta));
     }
   }
 

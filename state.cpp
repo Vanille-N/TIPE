@@ -7,9 +7,10 @@ State::State() {
     T[pole] = 0.0 ;
     phi = 0.0 ;
     alpha = 0.0 ;
-    gamma = 0.0 ;
+    beta = 0.0 ;
     delta = 0.0 ;
     transport = 0.0 ;
+    read("_default_.stt") ;
 }
 
 void State::read (QString input) {
@@ -23,7 +24,6 @@ void State::read (QString input) {
     data >> phi ;
     Sig[equator] = 0.0 ;
     Sig[pole] = 0.0 ;
-
 }
 
 void State::write (QString output) {
@@ -35,20 +35,19 @@ void State::write (QString output) {
     data << S[pole] ;
     data << T[pole] ;
     data << phi ;
-
 }
 
 double State::getAlpha () { return alpha ; }
-double State::getGamma () { return gamma ; }
+double State::getBeta () { return beta ; }
 double State::getDelta () { return delta ; }
-double State::getTrans () { return transport ; }
+double State::getPhiAdim () { return transport ; }
 double State::getSig (loc l) { return Sig[l] ; }
 double State::getPhi () { return phi ; }
 double State::getS (loc l) { return S[l] ; }
 double State::getT (loc l) { return T[l] ; }
 
 void State::setAlpha (double val) { alpha = val ; }
-void State::setGamma (double val) { gamma = val ; }
+void State::setBeta (double val) { beta = val ; }
 void State::setDelta (double val) { delta = val ; }
 void State::setTrans (double val) { transport = val ; }
 void State::setSig (loc l, double val) { Sig[l] = val ; }

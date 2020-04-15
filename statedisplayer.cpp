@@ -1,7 +1,7 @@
 #include "statedisplayer.h"
 
-StateDisplayer::StateDisplayer (QString label, QWidget * parent, State * Stt, loc l) {
-    setFixedSize(200, 400) ;
+StateDisplayer::StateDisplayer (QString label, QWidget * parent, QVector<State *> & Stt, loc l) {
+    setFixedSize(150, 350) ;
     m_parent = parent ;
     m_Stt = Stt ;
     m_l = l ;
@@ -26,22 +26,22 @@ StateDisplayer::StateDisplayer (QString label, QWidget * parent, State * Stt, lo
     m_lcdSig->setAutoFillBackground(true) ;
     m_lcdS->setAutoFillBackground(true) ;
     m_lcdT->setAutoFillBackground(true) ;
-    m_lcdSig->setToolTip("Densité (normalisée)") ;
-    m_lcdS->setToolTip("Salinité") ;
-    m_lcdT->setToolTip("Température") ;
+    m_lcdSig->setToolTip("Masse volumique (normalisée), kg⋅m⁻³") ;
+    m_lcdS->setToolTip("Salinité, psu") ;
+    m_lcdT->setToolTip("Température, °C") ;
     QPalette Pal = m_lcdS->palette() ;
     Pal.setColor(QPalette::Normal, QPalette::WindowText, Qt::black) ;
     Pal.setColor(QPalette::Normal, QPalette::Window, Qt::white) ;
     m_lcdS->setPalette(Pal) ;
     m_lcdT->setPalette(Pal) ;
 
-    m_lcdS->display(m_Stt->getS(m_l)) ;
-    m_lcdT->display(m_Stt->getT(m_l)) ;
-    m_lcdSig->display(m_Stt->getSig(m_l)) ;
+    m_lcdS->display(m_Stt[0]->getS(m_l)) ;
+    m_lcdT->display(m_Stt[0]->getT(m_l)) ;
+    m_lcdSig->display(m_Stt[0]->getSig(m_l)) ;
 
     m_varname = new QLabel(m_label) ;
     m_varname->setAlignment(Qt::AlignCenter) ;
-    m_varname->setFont(QFont("helvetica", 20)) ;
+    m_varname->setFont(QFont("ubuntu", 20)) ;
 
     m_vbox->addWidget(m_varname) ;
     m_SigLabel = new QLabel ("σ") ;
@@ -50,9 +50,9 @@ StateDisplayer::StateDisplayer (QString label, QWidget * parent, State * Stt, lo
     m_SigLabel->setAlignment(Qt::AlignCenter) ;
     m_SLabel->setAlignment(Qt::AlignCenter) ;
     m_TLabel->setAlignment(Qt::AlignCenter) ;
-    m_SigLabel->setFont(QFont("helvetica", 15)) ;
-    m_SLabel->setFont(QFont("helvetica", 15)) ;
-    m_TLabel->setFont(QFont("helvetica", 15)) ;
+    m_SigLabel->setFont(QFont("ubuntu", 15)) ;
+    m_SLabel->setFont(QFont("ubuntu", 15)) ;
+    m_TLabel->setFont(QFont("ubuntu", 15)) ;
     m_vbox->addWidget(m_SigLabel) ;
     m_vbox->addWidget(m_lcdSig) ;
     m_vbox->addWidget(m_SLabel) ;
@@ -63,21 +63,23 @@ StateDisplayer::StateDisplayer (QString label, QWidget * parent, State * Stt, lo
     setLayout(m_vbox) ;
 
     connect(this, SIGNAL(clicked()), this, SLOT(launchEditor())) ;
+    connect(m_parent, SIGNAL(closed()), m_ed, SLOT(close())) ;
 }
 
 void StateDisplayer::refresh () {
-    m_lcdSig->display(m_Stt->getSig(m_l)) ;
-    m_lcdS->display(m_Stt->getS(m_l)) ;
-    m_lcdT->display(m_Stt->getT(m_l)) ;
+    m_lcdSig->display(m_Stt[0]->getSig(m_l)) ;
+    m_lcdS->display(m_Stt[0]->getS(m_l)) ;
+    m_lcdT->display(m_Stt[0]->getT(m_l)) ;
 }
 
 void StateDisplayer::launchEditor () {
+    m_ed->close() ;
     m_ed->show() ;
 }
 
 void StateDisplayer::delEd () {
-    m_lcdSig->display(m_Stt->getSig(m_l)) ;
-    m_lcdS->display(m_Stt->getS(m_l)) ;
-    m_lcdT->display(m_Stt->getT(m_l)) ;
+    m_lcdSig->display(m_Stt[0]->getSig(m_l)) ;
+    m_lcdS->display(m_Stt[0]->getS(m_l)) ;
+    m_lcdT->display(m_Stt[0]->getT(m_l)) ;
     m_ed->close() ;
 }

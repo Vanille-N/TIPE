@@ -2,7 +2,7 @@
 
 TimeMgr::TimeMgr (QWidget * parent, Const * Cst) {
     TIME = 0.0 ;
-    setFixedSize(85, 90) ;
+    setFixedSize(70, 70) ;
     m_parent = parent ;
     m_Cst = Cst ;
     m_vbox = new QVBoxLayout ;
@@ -20,7 +20,7 @@ TimeMgr::TimeMgr (QWidget * parent, Const * Cst) {
     m_lcd->display(TIME) ;
 
     m_vbox->addWidget(m_lcd) ;
-    m_vbox->addWidget(new QLabel ("     TIME")) ;
+    m_vbox->addWidget(new QLabel ("TIME")) ;
 
     setLayout(m_vbox) ;
 
@@ -30,4 +30,9 @@ TimeMgr::TimeMgr (QWidget * parent, Const * Cst) {
 void TimeMgr::tick () {
     TIME += m_Cst->get(dt) ;
     m_lcd->display(TIME) ;
+    timeout() ;
+}
+
+double TimeMgr::clock () {
+    return TIME ;
 }

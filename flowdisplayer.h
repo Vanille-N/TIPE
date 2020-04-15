@@ -22,7 +22,7 @@ private:
     QVBoxLayout * m_vbox ;
     QLCDNumber * m_lcdPhi ;
     QLCDNumber * m_lcdAlpha ;
-    QLCDNumber * m_lcdGamma ;
+    QLCDNumber * m_lcdBeta ;
     QLCDNumber * m_lcdDelta ;
     QLCDNumber * m_lcdTrans ;
     QWidget * m_parent ;

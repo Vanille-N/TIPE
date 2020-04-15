@@ -3,6 +3,10 @@
 #include <iostream>
 #include <QtWidgets>
 #include <QTimer>
+#include <QPixmap>
+#include <QRect>
+#include <QRegion>
+#include <QVector>
 #include "constdisplayer.h"
 #include "statedisplayer.h"
 #include "flowdisplayer.h"
@@ -12,27 +16,46 @@
 #include "timemgr.h"
 #include "const.h"
 #include "state.h"
-#include "plotwindow.h"
+#include "diagramplot.h"
+#include "stateplot.h"
+#include "layoutselector.h"
+#include "simulview.h"
 
 class SimWindow : public QWidget {
     Q_OBJECT
 public:
     SimWindow () ;
+    bool m_eqmVal ;
+    bool m_cplVal ;
 
 signals:
      void refresh () ;
+     void closed () ;
 
 public slots:
     void getOutputCst() ;
     void getOutputStt() ;
     void getInputCst() ;
     void getInputStt() ;
-    void PAUSE () ;
+    void toggleCpl () ;
+    void toggleEqm () ;
+    void launchLayoutSelect () ;
+    void setlayout_full () ;
+    void setlayout_diagramhybrid () ;
+    void setlayout_statehybrid () ;
+    void setlayout_hybrid () ;
+    void setlayout_diagram () ;
+    void setlayout_state () ;
+
+    //void PAUSE () ;
     void SKIP () ;
-    void PLAY () ;
+    void PLAYPAUSE () ;
     void PING () ;
+    void screenshot () ;
 
 private:
+    void closeEvent (QCloseEvent *) ;
+
     QButtonGroup * m_playgroup ;
     QButtonGroup * m_skipgroup ;
     ActionButton * m_actPlay ;
@@ -44,22 +67,25 @@ private:
     QRadioButton * m_skip5 ;
     QRadioButton * m_play10 ;
     QRadioButton * m_skip10 ;
-    QPushButton * m_actSavestate ;
-    QPushButton * m_actLoadstate ;
-    QPushButton * m_actSaveconst ;
-    QPushButton * m_actLoadconst ;
-    QPushButton * m_helpButton ;
-    QPushButton * m_actSetPlay ;
-    QPushButton * m_actSetSkip ;
-    QPushButton * m_actPause ;
-    QPushButton * m_actSkip ;
-    QPushButton * m_circul ;
-    QPushButton * m_eBox ;
-    QPushButton * m_pBox ;
+    ActionButton * m_actSavestate ;
+    ActionButton * m_actLoadstate ;
+    ActionButton * m_actSaveconst ;
+    ActionButton * m_actLoadconst ;
+    ActionButton * m_helpButton ;
+    ActionButton * m_actPlayPause ;
+    ActionButton * m_actSkip ;
+    //ActionButton * m_actPause ;
+    //ActionButton * m_actSkip ;
+    FlowDisplayer * m_circul ;
+    StateDisplayer * m_eBox ;
+    StateDisplayer * m_pBox ;
+    QPushButton * m_toggleCoupling ;
+    QPushButton * m_toggleEquilibrium ;
+    QPushButton * m_launchLayoutSelect ;
     QHBoxLayout * m_selectbox ;
-    QHBoxLayout * m_simArea ;
     QVBoxLayout * m_playbox ;
     QVBoxLayout * m_skipbox ;
+    QGridLayout * m_vselect ;
     QGridLayout * m_grid ;
     QWidget * m_select ;
     ConstDisplayer * m_displamb ;
@@ -75,8 +101,12 @@ private:
     TimeMgr * m_dispTIME ;
     HelpWin * m_help ;
     QTimer * m_timer ;
-    Const * m_Cst ;
+    QVector<Const *> m_Cst ;
     Const * m_Aim ;
-    State * m_Stt ;
-    PlotWindow * m_plot ;
+    QVector<State *> m_Stt ;
+    DiagramPlot * m_diagramplot ;
+    StatePlot * m_stateplot ;
+    LayoutSelector * m_layoutSelect ;
+    SimulView * m_simArea ;
+    bool m_playing ;
 };

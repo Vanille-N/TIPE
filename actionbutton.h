@@ -11,6 +11,8 @@ class ActionButton : public QPushButton {
 public:
     ActionButton (QWidget *, QString,  QStyle::StandardPixmap) ;
 
+    void setImage (QStyle::StandardPixmap) ;
+
 private:
     QString m_helptext ;
     QWidget * m_parent ;

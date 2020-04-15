@@ -2,7 +2,7 @@
 
 HelpWin::HelpWin () {
     QString helpMessage ("") ;
-    QString filename ("help.txt") ;
+    QString filename ("_help_.txt") ;
     QFile file (filename) ;
     if (!file.exists()) {
         std::cout << "No such file : " << filename.toStdString() << std::endl ;

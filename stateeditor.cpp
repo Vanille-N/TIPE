@@ -1,6 +1,6 @@
 #include "stateeditor.h"
 
-StateEditor::StateEditor(State * Stt, loc l, QString param, QWidget * parent) {
+StateEditor::StateEditor(QVector<State *> & Stt, loc l, QString param, QWidget * parent) {
     m_Stt = Stt ;
     m_l = l ;
     m_parent = parent ;
@@ -14,7 +14,7 @@ StateEditor::StateEditor(State * Stt, loc l, QString param, QWidget * parent) {
     m_lcdS->setStyleSheet("background-color: black;") ;
     m_lcdS->setSmallDecimalPoint(true) ;
     m_lcdS->setDigitCount(8) ;
-    m_lcdS->display(m_Stt->getS(m_l)) ;
+    m_lcdS->display(m_Stt[0]->getS(m_l)) ;
     m_buttonsS = new QGridLayout ;
     m_upOneS = new QPushButton("↑", this) ;
     m_upTthS = new QPushButton("↑", this) ;
@@ -49,7 +49,7 @@ StateEditor::StateEditor(State * Stt, loc l, QString param, QWidget * parent) {
     m_lcdT->setStyleSheet("background-color: black;") ;
     m_lcdT->setSmallDecimalPoint(true) ;
     m_lcdT->setDigitCount(8) ;
-    m_lcdT->display(m_Stt->getT(m_l)) ;
+    m_lcdT->display(m_Stt[0]->getT(m_l)) ;
     m_buttonsT = new QGridLayout ;
     m_upOneT = new QPushButton("↑", this) ;
     m_upTthT = new QPushButton("↑", this) ;
@@ -98,8 +98,11 @@ void StateEditor::decrTthS () { chvalS(-0.1) ; }
 void StateEditor::decrHthS () { chvalS(-0.01) ; }
 
 void StateEditor::chvalS (double step) {
-    m_Stt->setS(m_l, step + m_Stt->getS(m_l)) ;
-    m_lcdS->display(m_Stt->getS(m_l)) ;
+    m_Stt[0]->setS(m_l, step + m_Stt[0]->getS(m_l)) ;
+    m_lcdS->display(m_Stt[0]->getS(m_l)) ;
+    for (int K = 1; K < NB_POINTS; K++) {
+        m_Stt[K]->setS(m_l, m_Stt[0]->getS((m_l))) ;
+    }
 }
 
 void StateEditor::incrOneT () { chvalT(1.0) ; }
@@ -110,11 +113,14 @@ void StateEditor::decrTthT () { chvalT(-0.1) ; }
 void StateEditor::decrHthT () { chvalT(-0.01) ; }
 
 void StateEditor::chvalT (double step) {
-    m_Stt->setT(m_l, step + m_Stt->getT(m_l)) ;
-    m_lcdT->display(m_Stt->getT(m_l)) ;
+    m_Stt[0]->setT(m_l, step + m_Stt[0]->getT(m_l)) ;
+    m_lcdT->display(m_Stt[0]->getT(m_l)) ;
+    for (int K = 1; K < NB_POINTS; K++) {
+        m_Stt[K]->setT(m_l, m_Stt[0]->getT((m_l))) ;
+    }
 }
 
 void StateEditor::refresh () {
-    m_lcdS->display(m_Stt->getS(m_l)) ;
-    m_lcdT->display(m_Stt->getT(m_l)) ;
+    m_lcdS->display(m_Stt[0]->getS(m_l)) ;
+    m_lcdT->display(m_Stt[0]->getT(m_l)) ;
 }
