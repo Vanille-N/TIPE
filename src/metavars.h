@@ -14,7 +14,7 @@
 // 0 for rectangles, 1 for trapezes
 
 
-#define NB_POINTS 20
+#define NB_POINTS 1
 #define VARIABILITY 0.03
 
 #define HIST_LEN_DIAG 200
