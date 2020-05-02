@@ -17,4 +17,3 @@ private:
     int capa ;
     int len ;
 };
-
