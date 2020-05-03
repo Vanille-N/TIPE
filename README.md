@@ -11,7 +11,7 @@ Villani Neven, MP*3 au lycée Louis-le-Grand (Paris)
 
 Ce projet aurait dû servir pour l'épreuve orale de TIPE (Océan) des concours de fin de CPGE (session 2019-2020), mais celle-ci a été annulée.
 
-Des versions compilées sont disponibles dans `dist/`, le code source intégral se trouve dans `src/`.
+Des versions précompilées sont disponibles dans `dist/`, le code source intégral se trouve dans `src/`.
 
 Informations de compilation :
 - pour Windows :
