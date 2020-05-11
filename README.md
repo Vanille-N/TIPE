@@ -25,4 +25,4 @@ Informations de compilation :
     - qmake 3.1
     - gcc 9.3.0
 
-Pour plus d'information sur l'utilisation de cette application, consulter `src/helpsetup.h`, qui contient un protocole expérimental destiné à mettre en évidence l'existence d'un phénomène d'hystérésis dans le modèle de Stommel. Ce même protocole est accessible lors de l'exécution via le bouton d'aide (bleu).
+Pour plus d'information sur l'utilisation de cette application, consulter `src/helpsetup.h`, qui contient entre autres un protocole expérimental destiné à mettre en évidence l'existence d'un phénomène d'hystérésis dans le modèle de Stommel. Ce même protocole est accessible lors de l'exécution via le bouton d'aide (bleu).
