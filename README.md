@@ -8,7 +8,7 @@ As this is a school project, an english version is neither available nor schedul
 ```diff
 - WARNING
 A few memory leaks have recently been discovered and patched.
-Be aware that some may still be present.
+Both precompiled versions are up to date with the patched source code but be aware that some may still be present.
 ```
 
 ### Modélisation informatique interactive du modèle océanique à compartiments de Stommel.
