@@ -3,8 +3,8 @@
 StateEditor::StateEditor(QVector<State *> & Stt, loc l, QString param, QWidget * parent) {
     m_Stt = Stt ;
     m_l = l ;
-    m_parent = parent ;
     m_param = param ;
+    m_parent = parent ;
 
     m_vbox = new QVBoxLayout ;
     m_hbox = new QHBoxLayout ;
@@ -81,7 +81,7 @@ StateEditor::StateEditor(QVector<State *> & Stt, loc l, QString param, QWidget *
 
 
     m_okButton = new QPushButton("OK", this) ;
-    connect(m_okButton, SIGNAL(clicked()), m_parent, SLOT(delEd())) ;
+    connect(m_okButton, SIGNAL(clicked()), parent, SLOT(delEd())) ;
     m_vbox->addWidget(new QLabel("Editor for "+m_param)) ;
     m_hbox->addLayout(m_Sbox) ;
     m_hbox->addLayout(m_Tbox) ;

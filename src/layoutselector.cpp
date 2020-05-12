@@ -6,9 +6,9 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     move(1220, 20) ;
     setFixedSize(120, 700) ;
     setWindowTitle("Layout") ;
-    m_parent = win ;
+    m_parent = win;
 
-    auto base = new QVBoxLayout () ;
+    auto base = new QVBoxLayout (this) ;
     auto lvA = new QHBoxLayout () ;
     auto lvB = new QHBoxLayout () ;
     auto lvC = new QHBoxLayout () ;
@@ -27,7 +27,7 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     auto lvBa = new QVBoxLayout () ;
     auto lvCa = new QVBoxLayout () ;
     auto rAa1 = new QLabel * [9] ;
-    for (int i = 0; i < 9; i++) rAa1[i] = new QLabel ("") ;
+    for (int i = 0; i < 9; i++) rAa1[i] = new QLabel ("", this) ;
     auto rAa2 = new QLabel ("") ;
     auto rAb1 = new QLabel ("") ;
     auto rAb2 = new QLabel ("") ;
@@ -41,7 +41,7 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     auto rDb = new QLabel ("") ;
     auto rE = new QLabel ("") ;
     auto rF = new QLabel ("") ;
-    auto capture = new QPushButton ("Screenshot") ;
+    auto capture = new QPushButton ("Screenshot", this) ;
 
     int buttonsize = 8 ;
     int D = 35 ;

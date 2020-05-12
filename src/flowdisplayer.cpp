@@ -2,16 +2,15 @@
 
 FlowDisplayer::FlowDisplayer (QWidget * parent, State * Stt) {
     setFixedSize(150, 350) ;
-    m_parent = parent ;
     m_Stt = Stt ;
-    connect(m_parent, SIGNAL(refresh()), this, SLOT(refresh())) ;
+    connect(parent, SIGNAL(refresh()), this, SLOT(refresh())) ;
     m_vbox = new QVBoxLayout ;
-    setParent(m_parent) ;
-    m_lcdPhi = new QLCDNumber() ;
-    m_lcdAlpha = new QLCDNumber() ;
-    m_lcdBeta = new QLCDNumber() ;
-    m_lcdDelta = new QLCDNumber() ;
-    m_lcdTrans = new QLCDNumber() ;
+    setParent(parent) ;
+    m_lcdPhi = new QLCDNumber (this) ;
+    m_lcdAlpha = new QLCDNumber (this) ;
+    m_lcdBeta = new QLCDNumber (this) ;
+    m_lcdDelta = new QLCDNumber (this) ;
+    m_lcdTrans = new QLCDNumber (this) ;
     m_lcdPhi->setSmallDecimalPoint(true) ;
     m_lcdAlpha->setSmallDecimalPoint(true) ;
     m_lcdBeta->setSmallDecimalPoint(true) ;
@@ -52,8 +51,8 @@ FlowDisplayer::FlowDisplayer (QWidget * parent, State * Stt) {
     m_lcdDelta->display(0) ;
     m_lcdTrans->display(0) ;
 
-    m_surfaceFlow = new QLabel (FLOWRT) ;
-    m_deepFlow = new QLabel (FLOWLT) ;
+    m_surfaceFlow = new QLabel (FLOWRT, this) ;
+    m_deepFlow = new QLabel (FLOWLT, this) ;
     m_surfaceFlow->setAlignment(Qt::AlignCenter) ;
     m_deepFlow->setAlignment(Qt::AlignCenter) ;
     m_surfaceFlow->setFont(QFont("helvetica", 20, QFont::Bold)) ;
@@ -62,16 +61,16 @@ FlowDisplayer::FlowDisplayer (QWidget * parent, State * Stt) {
     auto gammabox = new QHBoxLayout () ;
     auto deltabox = new QHBoxLayout () ;
     auto phibox = new QHBoxLayout () ;
-    alphabox->addWidget(new QLabel ("   α'"), 1) ;
-    gammabox->addWidget(new QLabel ("   β'"), 1) ;
-    deltabox->addWidget(new QLabel ("   δ'"), 1) ;
-    phibox->addWidget(new QLabel ("   ϕ'"), 1) ;
+    alphabox->addWidget(new QLabel ("   α'", this), 1) ;
+    gammabox->addWidget(new QLabel ("   β'", this), 1) ;
+    deltabox->addWidget(new QLabel ("   δ'", this), 1) ;
+    phibox->addWidget(new QLabel ("   ϕ'", this), 1) ;
     alphabox->addWidget(m_lcdAlpha, 5) ;
     gammabox->addWidget(m_lcdBeta, 5) ;
     deltabox->addWidget(m_lcdDelta, 5) ;
     phibox->addWidget(m_lcdTrans, 5) ;
     m_vbox->addWidget(m_surfaceFlow) ;
-    m_vbox->addWidget(new QLabel ("   ϕ")) ;
+    m_vbox->addWidget(new QLabel ("   ϕ", this)) ;
     m_vbox->addWidget(m_lcdPhi) ;
     m_vbox->addLayout(alphabox) ;
     m_vbox->addLayout(gammabox) ;

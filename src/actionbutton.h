@@ -15,7 +15,6 @@ public:
 
 private:
     QString m_helptext ;
-    QWidget * m_parent ;
     QLabel * m_label ;
 };
 

@@ -2,8 +2,7 @@
 
 ActionButton::ActionButton (QWidget * parent, QString helptext, QStyle::StandardPixmap iconIdx) {
     setFixedSize(70, 70) ;
-    m_parent = parent ;
-    setParent(m_parent) ;
+    setParent(parent) ;
     setToolTip(helptext) ;
 
     m_label = new QLabel (this) ;

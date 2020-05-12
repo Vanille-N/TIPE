@@ -2,15 +2,14 @@
 
 StateDisplayer::StateDisplayer (QString label, QWidget * parent, QVector<State *> & Stt, loc l) {
     setFixedSize(150, 350) ;
-    m_parent = parent ;
     m_Stt = Stt ;
     m_l = l ;
     m_label = "<html><strong>" + label + "</strong></html>" ;
     m_ed = new StateEditor(m_Stt, m_l, m_label, this) ;
     m_vbox = new QVBoxLayout ;
-    connect(m_parent, SIGNAL(refresh()), this, SLOT(refresh())) ;
-    connect(m_parent, SIGNAL(refresh()), m_ed, SLOT(refresh())) ;
-    setParent(m_parent) ;
+    connect(parent, SIGNAL(refresh()), this, SLOT(refresh())) ;
+    connect(parent, SIGNAL(refresh()), m_ed, SLOT(refresh())) ;
+    setParent(parent) ;
     m_lcdSig = new QLCDNumber() ;
     m_lcdS = new QLCDNumber() ;
     m_lcdT = new QLCDNumber() ;
@@ -63,7 +62,11 @@ StateDisplayer::StateDisplayer (QString label, QWidget * parent, QVector<State *
     setLayout(m_vbox) ;
 
     connect(this, SIGNAL(clicked()), this, SLOT(launchEditor())) ;
-    connect(m_parent, SIGNAL(closed()), m_ed, SLOT(close())) ;
+    connect(parent, SIGNAL(closed()), m_ed, SLOT(close())) ;
+}
+
+StateDisplayer::~StateDisplayer () {
+    delete m_ed ;
 }
 
 void StateDisplayer::refresh () {

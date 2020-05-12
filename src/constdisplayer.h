@@ -10,6 +10,7 @@ class ConstDisplayer : public QPushButton {
     Q_OBJECT
 public:
     ConstDisplayer (QString, QWidget *, Const *, Const *, cst, QString) ;
+    ~ConstDisplayer () ;
 
 public slots:
     void launchEditor () ;
@@ -20,7 +21,6 @@ private:
     QVBoxLayout * m_vbox ;
     QLCDNumber * m_lcd ;
     QString m_label ;
-    QWidget * m_parent ;
     QLabel * m_varname ;
     ConstEditor * m_ed ;
     Const * m_Cst ;

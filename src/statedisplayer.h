@@ -11,6 +11,7 @@ class StateDisplayer : public QPushButton {
     Q_OBJECT
 public:
     StateDisplayer (QString, QWidget *, QVector<State *> &, loc) ;
+    ~StateDisplayer () ;
 
 public slots:
     void launchEditor () ;
@@ -22,7 +23,6 @@ private:
     QLCDNumber * m_lcdS ;
     QLCDNumber * m_lcdT ;
     QLCDNumber * m_lcdSig ;
-    QWidget * m_parent ;
     QString m_label ;
     QLabel * m_varname ;
     QLabel * m_SigLabel ;

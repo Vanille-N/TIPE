@@ -19,7 +19,6 @@ signals:
 private:
     QVBoxLayout * m_vbox ;
     QLCDNumber * m_lcd ;
-    QWidget * m_parent ;
     Const * m_Cst ;
     double TIME ;
 };

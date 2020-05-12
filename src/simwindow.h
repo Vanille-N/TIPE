@@ -25,6 +25,7 @@ class SimWindow : public QWidget {
     Q_OBJECT
 public:
     SimWindow () ;
+    ~SimWindow () ;
     bool m_eqmVal ;
     bool m_cplVal ;
 

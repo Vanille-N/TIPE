@@ -16,7 +16,23 @@ StatePlot::StatePlot (QVector<State *> & Stt, QVector<Const *> & Cst, QWidget * 
     }
     cp = new QCustomPlot (this) ;
     cp->setFont(QFont("ubuntu", 11)) ;
+
     setup() ;
+}
+
+StatePlot::~StatePlot () {
+    delete m_colorMap ;
+    delete m_colorScale ;
+    delete m_marginGroup ;
+    delete cp ;
+    for (int i = 0; i < NB_POINTS; i++) delete Te_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete Tp_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete Se_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete Sp_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete eqTe_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete eqTp_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete eqSe_hist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete eqSp_hist[i] ;
 }
 
 void StatePlot::setup() {
@@ -25,32 +41,32 @@ void StatePlot::setup() {
     cp->xAxis->setLabel("Température (⁰C)") ;
     cp->yAxis->setLabel("Salinité (psu)") ;
 
-    QCPColorMap * colorMap = new QCPColorMap (cp->xAxis, cp->yAxis) ;
+    m_colorMap = new QCPColorMap (cp->xAxis, cp->yAxis) ;
     int nx = 200 ;
     int ny = 200 ;
-    colorMap->data()->setSize(nx, ny) ;
-    colorMap->data()->setRange(QCPRange(0, 40), QCPRange(30, 40)) ;
+    m_colorMap->data()->setSize(nx, ny) ;
+    m_colorMap->data()->setRange(QCPRange(0, 40), QCPRange(30, 40)) ;
     double S, T, sig ;
     for (int xIndex = 0; xIndex < nx; xIndex++) {
         for (int yIndex=0; yIndex<ny; ++yIndex) {
-            colorMap->data()->cellToCoord(xIndex, yIndex, &T, &S);
+            m_colorMap->data()->cellToCoord(xIndex, yIndex, &T, &S);
             sig = sigma(S, T) ;
-            colorMap->data()->setCell(xIndex, yIndex, sig);
+            m_colorMap->data()->setCell(xIndex, yIndex, sig);
         }
     }
 
-    QCPColorScale * colorScale = new QCPColorScale (cp) ;
-    cp->plotLayout()->addElement(0, 1, colorScale) ;
-    colorScale->setType(QCPAxis::atRight) ;
-    colorMap->setColorScale(colorScale) ;
-    colorScale->axis()->setLabel("σ = ρ - ρ₀ (kg⋅m⁻³)") ;
+    m_colorScale = new QCPColorScale (cp) ;
+    cp->plotLayout()->addElement(0, 1, m_colorScale) ;
+    m_colorScale->setType(QCPAxis::atRight) ;
+    m_colorMap->setColorScale(m_colorScale) ;
+    m_colorScale->axis()->setLabel("σ = ρ - ρ₀ (kg⋅m⁻³)") ;
 
-    colorMap->setGradient(QCPColorGradient::gpCold) ;
-    colorMap->rescaleDataRange() ;
+    m_colorMap->setGradient(QCPColorGradient::gpCold) ;
+    m_colorMap->rescaleDataRange() ;
 
-    QCPMarginGroup * marginGroup = new QCPMarginGroup(cp) ;
-    cp->axisRect()->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup) ;
-    colorScale->setMarginGroup(QCP::msBottom|QCP::msTop, marginGroup) ;
+    m_marginGroup = new QCPMarginGroup(cp) ;
+    cp->axisRect()->setMarginGroup(QCP::msBottom|QCP::msTop, m_marginGroup) ;
+    m_colorScale->setMarginGroup(QCP::msBottom|QCP::msTop, m_marginGroup) ;
 
     cp->rescaleAxes() ;
     int nbplots = 8 ;

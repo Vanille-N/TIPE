@@ -13,6 +13,7 @@ class DiagramPlot : public QWidget {
 
 public:
     DiagramPlot (QVector<State *> &, QTimer *, QWidget *) ;
+    ~DiagramPlot () ;
 
     void setup () ;
     void setFixedSize (int, int) ;

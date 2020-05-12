@@ -57,8 +57,8 @@ private:
     QVBoxLayout * m_Tbox ;
     QLCDNumber * m_lcdS ;
     QLCDNumber * m_lcdT ;
-    QWidget * m_parent ;
     QString m_param ;
     QVector<State *> m_Stt ;
+    QWidget * m_parent ;
     loc m_l ;
 };

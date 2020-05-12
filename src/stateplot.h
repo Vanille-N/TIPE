@@ -16,6 +16,7 @@ class StatePlot : public QWidget {
 
 public:
     StatePlot (QVector<State *> &, QVector<Const *> &, QWidget *) ;
+    ~StatePlot () ;
 
     void setup () ;
     void setFixedSize (int, int) ;
@@ -36,4 +37,7 @@ private:
     QVector<Circular *> eqSp_hist ;
     QVector<Circular *> Time_hist ;
     QCustomPlot * cp ;
+    QCPColorMap * m_colorMap ;
+    QCPColorScale * m_colorScale ;
+    QCPMarginGroup * m_marginGroup ;
 };

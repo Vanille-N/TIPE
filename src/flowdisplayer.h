@@ -25,7 +25,6 @@ private:
     QLCDNumber * m_lcdBeta ;
     QLCDNumber * m_lcdDelta ;
     QLCDNumber * m_lcdTrans ;
-    QWidget * m_parent ;
     QLabel * m_surfaceFlow ;
     QLabel * m_deepFlow ;
     QLabel * m_label ;

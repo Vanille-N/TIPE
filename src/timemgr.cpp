@@ -3,10 +3,9 @@
 TimeMgr::TimeMgr (QWidget * parent, Const * Cst) {
     TIME = 0.0 ;
     setFixedSize(70, 70) ;
-    m_parent = parent ;
     m_Cst = Cst ;
     m_vbox = new QVBoxLayout ;
-    setParent(m_parent) ;
+    setParent(parent) ;
     m_lcd = new QLCDNumber() ;
     m_lcd->setSmallDecimalPoint(true) ;
     m_lcd->setDigitCount(7) ;

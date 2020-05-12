@@ -12,6 +12,12 @@ DiagramPlot::DiagramPlot (QVector<State *> & Stt, QTimer * tick, QWidget * paren
     connect(tick, SIGNAL(timeout()), this, SLOT(dataSlot())) ;
 }
 
+DiagramPlot::~DiagramPlot () {
+    delete cp ;
+    for (int i = 0; i < NB_POINTS; i++) delete Xhist[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete Yhist[i] ;
+}
+
 void DiagramPlot::setup () {
     int nbplots = 3 ;
     for (int K = 0; K < NB_POINTS; K++) {

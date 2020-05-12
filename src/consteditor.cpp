@@ -54,9 +54,9 @@ ConstEditor::ConstEditor(Const * Aim, cst c, QString param, QWidget * parent) {
     }
 
     m_okButton = new QPushButton("OK", this) ;
-    connect(m_okButton, SIGNAL(clicked()), m_parent, SLOT(delEd())) ;
+    connect(m_okButton, SIGNAL(clicked()), parent, SLOT(delEd())) ;
 
-    m_vbox->addWidget(new QLabel("Editor for "+m_param)) ;
+    m_vbox->addWidget(new QLabel("Editor for "+m_param, this)) ;
     m_vbox->addWidget(m_lcd) ;
     m_vbox->addLayout(m_buttons) ;
     m_vbox->addWidget(m_okButton) ;

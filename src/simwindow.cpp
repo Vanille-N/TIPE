@@ -3,7 +3,7 @@
 SimWindow::SimWindow () {
     move(5, 5) ;
     setFixedSize(1215, 680) ;
-    m_grid = new QGridLayout () ;
+    m_grid = new QGridLayout (this) ;
     setLayout(m_grid) ;
     m_playing = false ;
 
@@ -43,8 +43,8 @@ SimWindow::SimWindow () {
     m_calc = new Calculator (this, m_Stt, m_Cst, m_Aim, &m_cplVal, &m_eqmVal) ;
     m_help = new HelpWin () ;
 
-    m_toggleEquilibrium = new QPushButton ("Équilibre\n(ON)") ;
-    m_toggleCoupling = new QPushButton ("Couplage\n(ON)") ;
+    m_toggleEquilibrium = new QPushButton ("Équilibre\n(ON)", this) ;
+    m_toggleCoupling = new QPushButton ("Couplage\n(ON)", this) ;
     m_toggleEquilibrium->setFont(QFont ("ubuntu", 11)) ;
     m_toggleCoupling->setFont(QFont ("ubuntu", 11)) ;
     m_toggleEquilibrium->setFixedSize(70, 70) ;
@@ -60,28 +60,28 @@ SimWindow::SimWindow () {
     connect(m_actLoadconst, SIGNAL(clicked()), this, SLOT(getInputCst())) ;
     connect(m_helpButton, SIGNAL(clicked()), m_help, SLOT(exec())) ;
 
-    m_playgroup = new QButtonGroup (this) ;
+    m_playgroup = new QButtonGroup () ;
     m_play1 = new QRadioButton("-") ;
     m_play5 = new QRadioButton("") ;
     m_play10 = new QRadioButton("+") ;
     m_play10->setChecked(true);
-    m_playbox = new QVBoxLayout ;
+    m_playbox = new QVBoxLayout () ;
     m_playgroup->addButton(m_play1) ;
     m_playgroup->addButton(m_play5) ;
     m_playgroup->addButton(m_play10) ;
-    auto label = new QLabel ("Play") ;
+    auto label = new QLabel ("Play", this) ;
     label->setFont(QFont("ubuntu", 15)) ;
     m_playbox->addWidget(label) ;
     m_playbox->addWidget(m_play1) ;
     m_playbox->addWidget(m_play5) ;
     m_playbox->addWidget(m_play10) ;
 
-    m_skipgroup = new QButtonGroup (this) ;
+    m_skipgroup = new QButtonGroup () ;
     m_skip1 = new QRadioButton("-") ;
     m_skip5 = new QRadioButton("") ;
     m_skip10 = new QRadioButton("+") ;
     m_skip1->setChecked(true);
-    m_skipbox = new QVBoxLayout ;
+    m_skipbox = new QVBoxLayout () ;
     m_skipgroup->addButton(m_skip1) ;
     m_skipgroup->addButton(m_skip5) ;
     m_skipgroup->addButton(m_skip10) ;
@@ -92,10 +92,10 @@ SimWindow::SimWindow () {
     m_skipbox->addWidget(m_skip5) ;
     m_skipbox->addWidget(m_skip10);
 
-    m_selectbox = new QHBoxLayout ;
+    m_selectbox = new QHBoxLayout () ;
     m_selectbox->addLayout(m_playbox) ;
     m_selectbox->addLayout(m_skipbox) ;
-    m_select = new QWidget (this) ;
+    m_select = new QWidget () ;
     m_select->setLayout(m_selectbox) ;
     m_select->setFixedSize(140, 140) ;
 
@@ -119,6 +119,14 @@ SimWindow::SimWindow () {
     setlayout_full() ;
     connect(m_layoutSelect, SIGNAL(closed()), this, SLOT(setlayout_full())) ;
     connect(this, SIGNAL(closed()), m_layoutSelect, SLOT(close())) ;
+}
+
+SimWindow::~SimWindow () {
+    delete m_calc ;
+    delete m_Aim ;
+    delete m_layoutSelect ;
+    for (int i = 0; i < NB_POINTS; i++) delete m_Cst[i] ;
+    for (int i = 0; i < NB_POINTS; i++) delete m_Stt[i] ;
 }
 
 void SimWindow::getInputCst() {
@@ -218,7 +226,7 @@ void SimWindow::toggleEqm () {
 
 
 void SimWindow::setlayout_full () {
-    while (m_grid->takeAt(0) != 0) ;
+    while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_grid->addWidget(m_dispSe, 0, 0) ; m_dispSe->show() ;
     m_grid->addWidget(m_dispSp, 0, 1) ; m_dispSp->show() ;
     m_grid->addWidget(m_disptauS, 0, 2) ; m_disptauS->show() ;
@@ -248,7 +256,7 @@ void SimWindow::setlayout_full () {
 }
 
 void SimWindow::setlayout_statehybrid () {
-    while (m_grid->takeAt(0) != 0) ;
+    while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
     m_dispSp->hide() ;
     m_disptauS->hide() ;
@@ -278,7 +286,7 @@ void SimWindow::setlayout_statehybrid () {
 }
 
 void SimWindow::setlayout_diagramhybrid () {
-    while (m_grid->takeAt(0) != 0) ;
+    while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
     m_dispSp->hide() ;
     m_disptauS->hide() ;
@@ -308,7 +316,7 @@ void SimWindow::setlayout_diagramhybrid () {
 }
 
 void SimWindow::setlayout_hybrid () {
-    while (m_grid->takeAt(0) != 0) ;
+    while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
     m_dispSp->hide() ;
     m_disptauS->hide() ;
@@ -338,7 +346,7 @@ void SimWindow::setlayout_hybrid () {
 }
 
 void SimWindow::setlayout_diagram () {
-    while (m_grid->takeAt(0) != 0) ;
+    while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
     m_dispSp->hide() ;
     m_disptauS->hide() ;
@@ -367,7 +375,7 @@ void SimWindow::setlayout_diagram () {
 }
 
 void SimWindow::setlayout_state () {
-    while (m_grid->takeAt(0) != 0) ;
+    while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
     m_dispSp->hide() ;
     m_disptauS->hide() ;
