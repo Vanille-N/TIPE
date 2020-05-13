@@ -22,14 +22,14 @@ Des versions précompilées sont disponibles dans `dist/`, le code source intég
 
 Informations de compilation :
 - pour Windows :
-    - VM 32 bits (hôte Ubuntu 18.04)
+    - VM Windows 10, 32bits (hôte Ubuntu 20.04)
     - Qt 5.14.1
     - qmake 3.1
     - mingw 7.3
 
 
 - pour Linux :
-    - Ubuntu 18.04, 64 bits
+    - Ubuntu 20.04, 64bits
     - Qt 5.9.5
     - qmake 3.1
     - gcc 9.3.0
