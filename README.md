@@ -19,7 +19,7 @@ code, but be aware that some other leaks may still be present.
 According to this answer:
 >>> Stack Overflow - How to make Qt GUI apps in C++ without memory leaks
 >>> @@ https://stackoverflow.com/a/14073965/10027774 @@
-The remaining leaks detected by Valgrind are mild at worst, intentionnal at best.
+The remaining leaks detected by Valgrind are mild at worst, intentionnal at best. 
 ```
 
 ```diff
