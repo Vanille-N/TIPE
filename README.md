@@ -45,4 +45,4 @@ Pour plus d'information sur l'utilisation de cette application, consulter `src/h
 
 Une présentation de l'interface graphique est disponible dans `LAYOUT.pdf`
 
-Pour des informations non sur cette application mais sur le modèle de Stommel lui-même, il est possible de consulter `PRESENTATION.pdf`, qui est un diaporama annoté.
+Pour des informations non sur cette application mais sur le modèle de Stommel lui-même, il est possible de consulter `PRESENTATION.pdf`, qui est la version annotée du diaporama `BEAMER.pdf`.
