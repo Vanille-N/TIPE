@@ -16,6 +16,14 @@ code, but be aware that some other leaks may still be present.
 
 ```diff
 ! NOTE
+According to this answer:
+>>> Stack Overflow - How to make Qt GUI apps in C++ without memory leaks
+>>> https://stackoverflow.com/a/14073965/10027774
+The remaining leaks detected by Valgrind are mild at worst, intentionnal at best.
+```
+
+```diff
+! NOTE
 Some characters are not properly displayed in the Windows version.
 Qt for Windows seems not to support UTF-8 symbols in the same way
 that Qt for Linux does.
