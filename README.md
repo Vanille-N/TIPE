@@ -2,8 +2,10 @@
 
 ## Simulation de la circulation thermohaline
 
-#### Note
+```diff
+! NOTE
 As this is a school project, an english version is neither available nor scheduled anytime soon.
+```
 
 ```diff
 - WARNING
