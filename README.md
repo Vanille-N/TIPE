@@ -12,9 +12,16 @@ Both precompiled versions are up to date with the patched source
 code, but be aware that some other leaks may still be present.
 ```
 
+```diff
+! NOTE
+Some characters are not properly displayed in the Windows version.
+Qt for Windows seems not to support UTF-8 symbols in the same way
+that Qt for Linux does.
+```
+
 ### Modélisation informatique interactive du modèle océanique à compartiments de Stommel.
 
-Villani Neven, MP*3 au lycée Louis-le-Grand (Paris)
+#### Villani Neven, MP*3 au lycée Louis-le-Grand (Paris)
 
 Ce projet aurait dû servir pour l'épreuve orale de TIPE (Océan) des concours de fin de CPGE (session 2019-2020), mais celle-ci a été annulée.
 
