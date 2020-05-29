@@ -1,5 +1,9 @@
 #include "actionbutton.h"
 
+/* A single button with an icon and a tooltip.
+ * Linked to one of the slots of its parent.
+ */
+
 ActionButton::ActionButton (QWidget * parent, QString helptext, QStyle::StandardPixmap iconIdx) {
     setFixedSize(70, 70) ;
     setParent(parent) ;

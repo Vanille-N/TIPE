@@ -1,5 +1,11 @@
 #include "circular.h"
 
+/* A circular buffer with fixed capacity
+ * This data structure turns out to be a perfect fit for our use-case:
+ * in both graphs, we need a moving constant-length range of states displayed,
+ * and we care little about the order.
+ */
+
 Circular::Circular (int capacity) {
     capa = capacity ;
     tab = new QVector<double> ;
@@ -29,9 +35,7 @@ void Circular::insert (double item) {
 QVector<double> Circular::extract () {
     QVector<double> dir (len) ;
     for (int i = 0; i < len; i++) {
-        //printf("%d\n", (idx+i-len) % capa) ;
         dir[i] = (*tab)[(idx+i+capa-len+1) % capa] ;
-        //printf("i:%d  (*dir)[i]:%f  idx:%d  capa:%d  (*tab)[...]:%f\n", i, (*dir)[i]*1e10, idx, capa, (*tab)[(idx+i) % capa]*1e10) ;
     }
     return dir ;
 }
