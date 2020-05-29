@@ -4,7 +4,7 @@
 
 ```diff
 ! NOTE
-As this is a school project, an english version is neither available nor scheduled anytime soon.
+As this is a school project, an english version is neither available nor scheduled anytime soon. The code however is commented in english.
 ```
 
 ```diff
@@ -19,7 +19,7 @@ code, but be aware that some other leaks may still be present.
 According to this answer:
 @@ Stack Overflow - How to make Qt GUI apps in C++ without memory leaks @@
 @@ https://stackoverflow.com/a/14073965/10027774                        @@
-The remaining leaks detected by Valgrind are mild at worst, intentionnal at best. 
+The remaining leaks detected by Valgrind are mild at worst, intentional at best.
 ```
 
 ```diff
@@ -27,6 +27,13 @@ The remaining leaks detected by Valgrind are mild at worst, intentionnal at best
 Some characters are not properly displayed in the Windows version.
 Qt for Windows seems not to support UTF-8 symbols in the same way
 that Qt for Linux does.
+```
+
+```diff
+! NOTE
+Other visual differences can arise depending on the OS and Qt version.
+All images available throughout this document were obtained running
+Qt 5.9.5 on Ubuntu 18.04 or 20.04
 ```
 
 ### Modélisation informatique interactive du modèle océanique à compartiments de Stommel.
