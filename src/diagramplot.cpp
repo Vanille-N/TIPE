@@ -1,5 +1,11 @@
 #include "diagramplot.h"
 
+/* The DiagramPlot represents a collection of states (Xhist[i], Yhist[i]) on
+ * a two-dimensional diagram with the flow on the y-axis and a calculated
+ * alpha parameter on the y-axis.
+ * It also displays the calculated equilibrium states.
+ */
+
 DiagramPlot::DiagramPlot (QVector<State *> & Stt, QTimer * tick, QWidget * parent) {
     setParent(parent) ;
     cp = new QCustomPlot (this) ;
@@ -18,6 +24,8 @@ DiagramPlot::~DiagramPlot () {
     for (int i = 0; i < NB_POINTS; i++) delete Yhist[i] ;
 }
 
+/* Initialize colors and labels
+ */
 void DiagramPlot::setup () {
     int nbplots = 3 ;
     for (int K = 0; K < NB_POINTS; K++) {
@@ -39,6 +47,8 @@ void DiagramPlot::setup () {
     cp->replot() ;
 }
 
+/* Helper functions for calculating the equilibrium
+ */
 inline double dPhi (double phi) {
     return (phi >= 0 ? 1 : -1 );
 }
