@@ -52,6 +52,35 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     auto rF = new QLabel ("") ;
     auto capture = new QPushButton ("Screenshot", this) ;
 
+    /* The hierarchy is as follows:
+     * base --- lvA --- lvAa --- lvAa1 --- rAa1[0]   (red)
+     *      |       |        |         |    ...       ...
+     *      |       |        |         `-- rAa1[8]   (red)
+     *      |       |        `-- rAa2                (grey)
+     *      |       `-- lvAb --- rAb1                (blue)
+     *      |                `-- rAb2                (orange)
+     *      |-- lvB --- lvBa --- rBa1                (blue)
+     *      |       |        `-- rBa2                (grey)
+     *      |       `-- rBb                          (orange)
+     *      |-- lvC --- lvCa --- rCa1                (orange)
+     *      |       |        `-- rCa2                (grey)
+     *      |       `-- rCb                          (blue)
+     *      |-- lvD --- rDa                          (orange)
+     *      |       `-- rDb                          (blue)
+     *      |-- rE                                   (orange)
+     *      `-- rF                                   (blue)
+     * Note that:
+     *     - nodes
+     *          - are all named lv* (for 'level')
+     *          - are all Q*Layouts
+     *     - terminal leaves
+     *          - are all named r* (I forgot why)
+     *          - are all empty QLabels
+     *          - are the only colored items
+     *     - buttons q? have not been represented here, but are associated
+     *       with each lv?
+     */
+
     int buttonsize = 8 ;
     int D = 35 ;
     int U = 35 ;
