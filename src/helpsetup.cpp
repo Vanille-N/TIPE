@@ -1,5 +1,9 @@
 #include "helpsetup.h"
 
+/* This file is responsible for setting up the environment: default values
+ * and help file.
+ */
+
 static double cst [NB_CST] = {2000, 295, 50, 38, 32, 30, 2, 10, 8.6} ;
 
 static double stt [NB_STT] = {38, 30, 32, 2} ;
