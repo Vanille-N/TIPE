@@ -1,5 +1,9 @@
 #include "consteditor.h"
 
+/* The ConstEditor is a popup window with many butons to change the value of
+ * a constant, and it is the only way to do so.
+ */
+
 ConstEditor::ConstEditor(Const * Aim, cst c, QString param, QWidget * parent) {
     m_Aim = Aim ;
     m_c = c ;
