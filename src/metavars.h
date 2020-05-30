@@ -1,6 +1,10 @@
 #pragma once
 
 
+
+#define LINUX 1
+// Set to 0 before compiling for Windows
+
 #define CST_VAL 0
 // 0 or 1
 

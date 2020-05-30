@@ -47,8 +47,13 @@ SimWindow::SimWindow () {
     // Create rest of toolbar
     m_toggleEquilibrium = new QPushButton ("Équilibre\n(ON)", this) ;
     m_toggleCoupling = new QPushButton ("Couplage\n(ON)", this) ;
+#if LINUX
     m_toggleEquilibrium->setFont(QFont ("ubuntu", 11)) ;
     m_toggleCoupling->setFont(QFont ("ubuntu", 11)) ;
+#else
+    m_toggleEquilibrium->setFont(QFont ("arial", 11)) ;
+    m_toggleCoupling->setFont(QFont ("arial", 11)) ;
+#endif
     m_toggleEquilibrium->setFixedSize(70, 70) ;
     m_toggleCoupling->setFixedSize(70, 70) ;
     m_eqmVal = true ;
@@ -73,7 +78,11 @@ SimWindow::SimWindow () {
     m_playgroup->addButton(m_play5) ;
     m_playgroup->addButton(m_play10) ;
     auto label = new QLabel ("Play", this) ;
+#if LINUX
     label->setFont(QFont("ubuntu", 15)) ;
+#else
+    label->setFont(QFont("arial", 15)) ;
+#endif
     m_playbox->addWidget(label) ;
     m_playbox->addWidget(m_play1) ;
     m_playbox->addWidget(m_play5) ;
@@ -89,8 +98,13 @@ SimWindow::SimWindow () {
     m_skipgroup->addButton(m_skip5) ;
     m_skipgroup->addButton(m_skip10) ;
     auto label2 = new QLabel ("Skip") ;
+#if LINUX
     label2->setFont(QFont("ubuntu", 15)) ;
     m_skipbox->addWidget(label2) ;
+#else
+    label2->setFont(QFont("arial", 15)) ;
+    m_skipbox->addWidget(label2) ;
+#endif
     m_skipbox->addWidget(m_skip1) ;
     m_skipbox->addWidget(m_skip5) ;
     m_skipbox->addWidget(m_skip10);

@@ -15,8 +15,11 @@ StatePlot::StatePlot (QVector<State *> & Stt, QVector<Const *> & Cst, QWidget * 
         eqSp_hist.push_back(new Circular (HIST_LEN_STATE)) ;
     }
     cp = new QCustomPlot (this) ;
+#if LINUX
     cp->setFont(QFont("ubuntu", 11)) ;
-
+#else
+    cp->setFont(QFont("arial", 11)) ;
+#endif
     setup() ;
 }
 

@@ -40,7 +40,11 @@ StateDisplayer::StateDisplayer (QString label, QWidget * parent, QVector<State *
 
     m_varname = new QLabel(m_label) ;
     m_varname->setAlignment(Qt::AlignCenter) ;
+#if LINUX
     m_varname->setFont(QFont("ubuntu", 20)) ;
+#else
+    m_varname->setFont(QFont("arial", 20)) ;
+#endif
 
     m_vbox->addWidget(m_varname) ;
     m_SigLabel = new QLabel ("σ") ;
@@ -49,9 +53,15 @@ StateDisplayer::StateDisplayer (QString label, QWidget * parent, QVector<State *
     m_SigLabel->setAlignment(Qt::AlignCenter) ;
     m_SLabel->setAlignment(Qt::AlignCenter) ;
     m_TLabel->setAlignment(Qt::AlignCenter) ;
+#if LINUX
     m_SigLabel->setFont(QFont("ubuntu", 15)) ;
     m_SLabel->setFont(QFont("ubuntu", 15)) ;
     m_TLabel->setFont(QFont("ubuntu", 15)) ;
+#else
+    m_SigLabel->setFont(QFont("arial", 15)) ;
+    m_SLabel->setFont(QFont("arial", 15)) ;
+    m_TLabel->setFont(QFont("arial", 15)) ;
+#endif
     m_vbox->addWidget(m_SigLabel) ;
     m_vbox->addWidget(m_lcdSig) ;
     m_vbox->addWidget(m_SLabel) ;

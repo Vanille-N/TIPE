@@ -20,6 +20,7 @@
 #include "stateplot.h"
 #include "layoutselector.h"
 #include "simulview.h"
+#include "metavars.h"
 
 class SimWindow : public QWidget {
     Q_OBJECT

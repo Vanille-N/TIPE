@@ -29,7 +29,11 @@ ConstDisplayer::ConstDisplayer (QString label, QWidget * parent, Const * Cst, Co
 
     m_varname = new QLabel(m_label, this) ;
     m_varname->setAlignment(Qt::AlignCenter) ;
+#if LINUX
     m_varname->setFont(QFont("ubuntu", 15)) ;
+#else
+    m_varname->setFont(QFont("arial", 13)) ;
+#endif
 
     m_vbox->addWidget(m_lcd) ;
     m_vbox->addWidget(m_varname) ;

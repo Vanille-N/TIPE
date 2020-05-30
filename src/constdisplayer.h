@@ -5,6 +5,7 @@
 #include <QString>
 #include <QLabel>
 #include "consteditor.h"
+#include "metavars.h"
 
 class ConstDisplayer : public QPushButton {
     Q_OBJECT
