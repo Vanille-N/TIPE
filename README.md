@@ -24,16 +24,9 @@ The remaining leaks detected by Valgrind are mild at worst, intentional at best.
 
 ```diff
 ! NOTE
-Some characters are not properly displayed in the Windows version.
-Qt for Windows seems not to support UTF-8 symbols in the same way
-that Qt for Linux does.
-```
-
-```diff
-! NOTE
-Other visual differences can arise depending on the OS and Qt version.
+Some visual differences can arise depending on the OS and Qt version.
 All images available throughout this document were obtained running
-Qt 5.9.5 on Ubuntu 18.04 or 20.04
+Qt 5.9.5+ on Ubuntu 18.04 or 20.04
 ```
 
 ### Modélisation informatique interactive du modèle océanique à compartiments de Stommel.
@@ -46,15 +39,15 @@ Des versions précompilées sont disponibles dans `dist/`, le code source intég
 
 Informations de compilation :
 - pour Windows :
-    - VM Windows 10, 32bits (hôte Ubuntu 20.04)
-    - Qt 5.14.1
+    - VM Windows 10, 32bits (VirtualBox, hôte Ubuntu 20.04)
+    - Qt 5.15.0
     - qmake 3.1
     - mingw 7.3
 
 
 - pour Linux :
     - Ubuntu 20.04, 64bits
-    - Qt 5.9.5
+    - Qt 5.15.0
     - qmake 3.1
     - gcc 9.3.0
 
