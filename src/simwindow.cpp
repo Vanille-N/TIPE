@@ -1,5 +1,7 @@
 #include "simwindow.h"
 
+/* The main window, will all of the layout management + initialization
+ */
 SimWindow::SimWindow () {
     move(5, 5) ;
     setFixedSize(1215, 680) ;
@@ -14,13 +16,12 @@ SimWindow::SimWindow () {
         m_Stt.push_back(new State ()) ;
     }
 
-    // TOOLBAR
+    // Create part of toolbar that has ConstDisplayers + ActionButtons
     m_actSavestate = new ActionButton (this, "Save State (*.stt)", QStyle::SP_DialogSaveButton) ;
     m_actLoadstate = new ActionButton (this, "Load State (*.stt)", QStyle::SP_DialogOpenButton) ;
     m_actSaveconst = new ActionButton (this, "Save Const (*.cst)", QStyle::SP_DialogSaveButton) ;
     m_actLoadconst = new ActionButton (this, "Load Const (*.cst)", QStyle::SP_DialogOpenButton) ;
     m_actPlayPause = new ActionButton (this, "Play", QStyle::SP_MediaPlay) ;
-    //m_actPause = new ActionButton (this, "Pause", QStyle::SP_MediaPause) ;
     m_actSkip = new ActionButton (this, "Skip", QStyle::SP_MediaSkipForward) ;
     m_helpButton = new ActionButton (this, "Help", QStyle::SP_MessageBoxQuestion) ;
     m_dispTe = new ConstDisplayer ("Tₑ*", this, m_Cst[0], m_Aim, Te, "Température à l'équateur (équilibre), °C") ;
@@ -34,8 +35,8 @@ SimWindow::SimWindow () {
     m_disptauS = new ConstDisplayer ("τₛ", this, m_Cst[0], m_Aim, tauS, "Temps de relaxation en salinité, s") ;
     m_dispTIME = new TimeMgr (this, m_Cst[0]) ;
 
+    // Create layout manager
     m_layoutSelect = new LayoutSelector (this) ;
-    //m_layoutSelect->show() ;
     m_launchLayoutSelect = new QPushButton ("Layout", this) ;
     m_launchLayoutSelect->setFixedSize(70, 70) ;
     connect(m_launchLayoutSelect, SIGNAL(clicked()), this, SLOT(launchLayoutSelect())) ;
@@ -43,6 +44,7 @@ SimWindow::SimWindow () {
     m_calc = new Calculator (this, m_Stt, m_Cst, m_Aim, &m_cplVal, &m_eqmVal) ;
     m_help = new HelpWin () ;
 
+    // Create rest of toolbar
     m_toggleEquilibrium = new QPushButton ("Équilibre\n(ON)", this) ;
     m_toggleCoupling = new QPushButton ("Couplage\n(ON)", this) ;
     m_toggleEquilibrium->setFont(QFont ("ubuntu", 11)) ;
@@ -60,6 +62,7 @@ SimWindow::SimWindow () {
     connect(m_actLoadconst, SIGNAL(clicked()), this, SLOT(getInputCst())) ;
     connect(m_helpButton, SIGNAL(clicked()), m_help, SLOT(exec())) ;
 
+    // Play / Skip speed selectors
     m_playgroup = new QButtonGroup () ;
     m_play1 = new QRadioButton("-") ;
     m_play5 = new QRadioButton("") ;
@@ -103,14 +106,15 @@ SimWindow::SimWindow () {
     connect(m_timer, SIGNAL(timeout()), this, SLOT(PING())) ;
     connect(m_actSkip, SIGNAL(clicked()), this, SLOT(SKIP())) ;
     connect(m_actPlayPause, SIGNAL(clicked()), this, SLOT(PLAYPAUSE())) ;
-    //connect(m_actPause, SIGNAL(clicked()), this, SLOT(PAUSE())) ;
 
+    // Create diagrams
     m_diagramplot = new DiagramPlot (m_Stt, m_timer, this) ;
     m_diagramplot->show () ;
     m_stateplot = new StatePlot (m_Stt, m_Cst, this) ;
     m_stateplot->show () ;
     connect(m_timer, SIGNAL(timeout()), m_stateplot, SLOT(dataSlot())) ;
 
+    // Create lower left zone with three big buttons (simwindow)
     m_eBox = new StateDisplayer ("Équateur", this, m_Stt, equator) ;
     m_pBox = new StateDisplayer ("Pôle", this, m_Stt, pole) ;
     m_circul = new FlowDisplayer (this, m_Stt[0]) ;
@@ -129,6 +133,8 @@ SimWindow::~SimWindow () {
     for (int i = 0; i < NB_POINTS; i++) delete m_Stt[i] ;
 }
 
+/* Read consts from file
+ */
 void SimWindow::getInputCst() {
     QString input = QFileDialog::getOpenFileName(this, "Load Const", QString(), "Const (*.cst)") ;
     m_Aim->read(input) ;
@@ -138,6 +144,8 @@ void SimWindow::getInputCst() {
     refresh() ;
 }
 
+/* Initialize state from file
+ */
 void SimWindow::getInputStt() {
     QString input = QFileDialog::getOpenFileName(this, "Load State", QString(), "State (*.stt)") ;
     for (int K = 0; K < NB_POINTS; K++) {
@@ -146,16 +154,22 @@ void SimWindow::getInputStt() {
     refresh() ;
 }
 
+/* Print consts to file
+ */
 void SimWindow::getOutputCst() {
     QString output = QFileDialog::getSaveFileName(this, "Save Const", QString(), "Const (*.cst)") ;
     m_Aim->write(output) ;
 }
 
+/* Print state to file
+ */
 void SimWindow::getOutputStt() {
     QString output = QFileDialog::getSaveFileName(this, "Save State", QString(), "State (*.stt)") ;
     m_Stt[0]->write(output) ;
 }
 
+/* Calculate a bunch of steps at once then stop
+ */
 void SimWindow::SKIP () {
     if (m_playing) return ;
     int nbSkip = 1 ;
@@ -173,6 +187,8 @@ void SimWindow::SKIP () {
     }
 }
 
+/* Launch or stop the simulation (continuous calculations)
+ */
 void SimWindow::PLAYPAUSE () {
     if (m_playing) {
         m_timer->stop() ;
@@ -194,16 +210,19 @@ void SimWindow::PLAYPAUSE () {
     }
 }
 
-//void SimWindow::PAUSE () {
-//    m_timer->stop() ;
-//}
-
+/* A single tick of the timer triggers a step.
+ * Be careful of not setting the delay of the timer to a value shorter than
+ * what the time the simulation needs to do the calculations.
+ */
 void SimWindow::PING () {
     m_calc->step() ;
     m_dispTIME->tick() ;
     refresh() ;
 }
 
+/* See calculator.cpp to see how this boolean is used to toggle the coupling
+ * of the two boxes.
+ */
 void SimWindow::toggleCpl () {
     if (m_cplVal) {
         m_cplVal = false ;
@@ -214,6 +233,10 @@ void SimWindow::toggleCpl () {
     }
 }
 
+/* See calculator.cpp to see how this boolean is used to toggle the
+ * tendancy of each box to evolve towards a state determined by its associated
+ * constants only.
+ */
 void SimWindow::toggleEqm () {
     if (m_eqmVal) {
         m_eqmVal = false ;
@@ -224,7 +247,8 @@ void SimWindow::toggleEqm () {
     }
 }
 
-
+/* The default layout (see layout A in layoutselector.cpp)
+ */
 void SimWindow::setlayout_full () {
     while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_grid->addWidget(m_dispSe, 0, 0) ; m_dispSe->show() ;
@@ -255,6 +279,9 @@ void SimWindow::setlayout_full () {
     m_diagramplot->setFixedSize(700, 350) ;
 }
 
+/* Everything except the buttons is visible.
+ * StatePlot is bigger (see layout B)
+ */
 void SimWindow::setlayout_statehybrid () {
     while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
@@ -285,6 +312,9 @@ void SimWindow::setlayout_statehybrid () {
     m_diagramplot->setFixedSize(480, 300) ;
 }
 
+/* Everything except the buttons is visible
+ * DiagramPlot is bigger (see layout B)
+ */
 void SimWindow::setlayout_diagramhybrid () {
     while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
@@ -315,6 +345,9 @@ void SimWindow::setlayout_diagramhybrid () {
     m_diagramplot->setFixedSize(700, 660) ;
 }
 
+/* Only StatePlot and DiagramPlot are visible and of equal size
+ * (See layout C)
+ */
 void SimWindow::setlayout_hybrid () {
     while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
@@ -345,6 +378,8 @@ void SimWindow::setlayout_hybrid () {
     m_diagramplot->setFixedSize(580, 660) ;
 }
 
+/* Only DiagramPlot is visible (see layout E)
+ */
 void SimWindow::setlayout_diagram () {
     while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
@@ -374,6 +409,8 @@ void SimWindow::setlayout_diagram () {
     m_diagramplot->setFixedSize(1190, 660) ;
 }
 
+/* Only StatePlot is visible (see layout F)
+ */
 void SimWindow::setlayout_state () {
     while (m_grid->itemAt(0) != 0) delete m_grid->takeAt(0) ;
     m_dispSe->hide() ;
@@ -403,12 +440,15 @@ void SimWindow::setlayout_state () {
     m_diagramplot->hide() ;
 }
 
+/* Open sidebar to select layout
+ */
 void SimWindow::launchLayoutSelect () {
-    //std::cout << "launch" << std::endl ;
     m_layoutSelect->close() ;
     m_layoutSelect->show() ;
 }
 
+/* Capture state of the window and output to file
+ */
 void SimWindow::screenshot () {
     QRect rectangle (0, 0, width(), height()) ;
     QPixmap pixmap (rectangle.size()) ;
@@ -421,4 +461,3 @@ void SimWindow::closeEvent (QCloseEvent * event) {
     closed() ;
     event->accept() ;
 }
-
