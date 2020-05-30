@@ -21,10 +21,10 @@ StatePlot::StatePlot (QVector<State *> & Stt, QVector<Const *> & Cst, QWidget * 
 }
 
 StatePlot::~StatePlot () {
-    delete m_colorMap ;
-    delete m_colorScale ;
-    delete m_marginGroup ;
-    delete cp ;
+    //delete m_colorMap ;
+    //delete m_colorScale ;
+    //delete m_marginGroup ;
+    //delete cp ;
     for (int i = 0; i < NB_POINTS; i++) delete Te_hist[i] ;
     for (int i = 0; i < NB_POINTS; i++) delete Tp_hist[i] ;
     for (int i = 0; i < NB_POINTS; i++) delete Se_hist[i] ;

@@ -14,7 +14,7 @@ Circular::Circular (int capacity) {
 }
 
 Circular::~Circular () {
-    delete[] tab ;
+    delete tab ;
 }
 
 int Circular::length () {
