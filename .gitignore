@@ -3,3 +3,4 @@ build-local*
 local-*
 *.mkv
 *.o
+moc_*
