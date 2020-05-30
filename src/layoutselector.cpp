@@ -107,6 +107,27 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     lvA->addLayout(lvAa) ;
     lvA->addLayout(lvAb) ;
 
+    /*
+     *                       #-------------#
+     *       [0]  [1]  [2]   |             |
+     *                       |             |
+     *       [3]  [4]  [5]   |     Ab1     |
+     *                       |             |
+     *       [6]  [7]  [8]   |             |
+     *                       #-------------#
+     *
+     *      #-------------#  #-------------#
+     *      |             |  |             |
+     *      |             |  |             |
+     *      |     Aa2     |  |     Ab2     |
+     *      |             |  |             |
+     *      |             |  |             |
+     *      #-------------#  #-------------#
+     *
+     * (Note: [i] is Aa1[i])
+     */
+
+
     lvBa->addWidget(rBa1) ;
     rBa1->setStyleSheet("background-color: blue;") ;
     rBa1->setFixedSize(L, U) ;
@@ -117,6 +138,21 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     lvB->addWidget(rBb) ;
     rBb->setStyleSheet("background-color: orange;") ;
     rBb->setFixedSize(L, U+D+10) ;
+
+    /*
+     *     #--------------#  #--------------#
+     *     |              |  |              |
+     *     |     Ba       |  |              |
+     *     |              |  |              |
+     *     #--------------#  |              |
+     *                       |      Bb      |
+     *     #--------------#  |              |
+     *     |              |  |              |
+     *     |     Ba       |  |              |
+     *     |              |  |              |
+     *     #--------------#  #--------------#
+     */
+
 
     lvCa->addWidget(rCa1) ;
     rCa1->setStyleSheet("background-color: orange;") ;
@@ -129,6 +165,20 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     rCb->setStyleSheet("background-color: blue;") ;
     rCb->setFixedSize(L, U+D+10) ;
 
+    /*
+     *     #--------------#  #--------------#
+     *     |              |  |              |
+     *     |     Ca1      |  |              |
+     *     |              |  |              |
+     *     #--------------#  |              |
+     *                       |     Cb       |
+     *     #--------------#  |              |
+     *     |              |  |              |
+     *     |     Ca2      |  |              |
+     *     |              |  |              |
+     *     #--------------#  #--------------#
+     */
+
     lvD->addWidget(rDa) ;
     rDa->setStyleSheet("background-color: orange;") ;
     rDa->setFixedSize(L, U+D+10) ;
@@ -136,13 +186,56 @@ LayoutSelector::LayoutSelector (QWidget * win) {
     rDb->setStyleSheet("background-color: blue;") ;
     rDb->setFixedSize(R, U+D+10) ;
 
+    /*
+     *     #--------------#  #--------------#
+     *     |              |  |              |
+     *     |              |  |              |
+     *     |              |  |              |
+     *     |              |  |              |
+     *     |     Da       |  |     Db       |
+     *     |              |  |              |
+     *     |              |  |              |
+     *     |              |  |              |
+     *     |              |  |              |
+     *     #--------------#  #--------------#
+     */
+
+
     lvE->addWidget(rE) ;
     rE->setStyleSheet("background-color: orange;") ;
     rE->setFixedSize(L+R+10, U+D+10) ;
 
+    /*
+     *     #-------------------------------#
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     |              E                |
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     #-------------------------------#
+     */
+
     lvF->addWidget(rF) ;
     rF->setStyleSheet("background-color: blue;") ;
     rF->setFixedSize(L+R+10, U+D+10) ;
+
+    /*
+     *     #-------------------------------#
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     |              F                |
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     |                               |
+     *     #-------------------------------#
+     */
 
 
     qA->setLayout(lvA) ;
