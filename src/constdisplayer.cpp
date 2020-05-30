@@ -1,5 +1,9 @@
 #include "constdisplayer.h"
 
+/* One of the colored buttons with the name of a constant and a lcd display.
+ * It is responsible for bridging the gap between one of Const's fields and
+ * an associated ConstEditor.
+ */
 ConstDisplayer::ConstDisplayer (QString label, QWidget * parent, Const * Cst, Const * Aim, cst c, QString legend) {
     setFixedSize(70, 70) ;
     m_Cst = Cst ;
@@ -33,15 +37,14 @@ ConstDisplayer::ConstDisplayer (QString label, QWidget * parent, Const * Cst, Co
     setLayout(m_vbox) ;
 
     switch (m_c) {
-        case Te:
-        case Tp: setStyleSheet("background-color: lightblue;") ; break ;
-        case Se:
-        case Sp: setStyleSheet("background-color: lightgreen;") ; break ;
-        case dt:
-        case tauS:
-        case tauT: setStyleSheet("background-color: pink;") ; break ;
-        case lambda:
-        case M0: setStyleSheet("background-color: orange;") ; break ;
+        case Te: case Tp:
+            setStyleSheet("background-color: lightblue;") ; break ;
+        case Se: case Sp:
+            setStyleSheet("background-color: lightgreen;") ; break ;
+        case dt: case tauS: case tauT:
+            setStyleSheet("background-color: pink;") ; break ;
+        case lambda: case M0:
+            setStyleSheet("background-color: orange;") ; break ;
     }
 
     connect(this, SIGNAL(clicked()), this, SLOT(launchEditor())) ;
@@ -58,9 +61,12 @@ void ConstDisplayer::refresh () {
 
 void ConstDisplayer::launchEditor () {
     m_ed->close() ;
+    move(0, 800) ;
     m_ed->show() ;
 }
 
+/* In reality, doesn't delete the editor, just closes it
+ */
 void ConstDisplayer::delEd () {
     m_ed->close() ;
     m_lcd->display(m_Cst->get(m_c)) ;

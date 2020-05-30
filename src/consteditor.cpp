@@ -1,7 +1,6 @@
 #include "consteditor.h"
 
 ConstEditor::ConstEditor(Const * Aim, cst c, QString param, QWidget * parent) {
-    move(0, 800) ;
     m_Aim = Aim ;
     m_c = c ;
     m_parent = parent ;
