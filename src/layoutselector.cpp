@@ -2,6 +2,15 @@
 
 #include <QLabel>
 
+/* The LayoutSelector is the long window that pops up on the right when
+ * the 'Layout' button is pressed.
+ * It bears many colored buttons with rectangular drawings that represent
+ * each possible configuration of the main window. Clicking on a button
+ * switches the window to the selected layout.
+ * The 'Screenshot' button at the bottom saves an image of the current
+ * state of the main window to a user-specified location.
+ */
+
 LayoutSelector::LayoutSelector (QWidget * win) {
     move(1220, 20) ;
     setFixedSize(120, 700) ;
