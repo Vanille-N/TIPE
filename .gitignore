@@ -4,3 +4,4 @@ local-*
 *.mkv
 *.o
 moc_*
+_*_.txt
