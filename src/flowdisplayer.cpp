@@ -1,5 +1,12 @@
 ﻿#include "flowdisplayer.h"
 
+/* The FlowDisplayer is the central button surrounded by two StateDisplayers.
+ * It shows:
+ *    - the direction of the flow with arrows
+ *    - the value of the flow
+ *    - a number of calculated parameters that can ease the comparison to
+ *      the results of the analytical study.
+ */
 FlowDisplayer::FlowDisplayer (QWidget * parent, State * Stt) {
     setFixedSize(150, 350) ;
     m_Stt = Stt ;
