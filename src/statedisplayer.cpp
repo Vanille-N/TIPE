@@ -1,5 +1,13 @@
 #include "statedisplayer.h"
 
+/* The StateDisplayer is responsible for displaying the current status
+ * of a _single_ box. Although a State holds information to both boxes,
+ * that is not the case for a StateDisplayer (nor is it the case for a
+ * StateEditor).
+ * StateDisplayers are the two big buttons on each side of the FlowDisplayer.
+ * They show the salinity, temperature and density of each box and can be
+ * clicked to open a StateEditor.
+ */
 StateDisplayer::StateDisplayer (QString label, QWidget * parent, QVector<State *> & Stt, loc l) {
     setFixedSize(150, 350) ;
     m_Stt = Stt ;
@@ -85,11 +93,16 @@ void StateDisplayer::refresh () {
     m_lcdT->display(m_Stt[0]->getT(m_l)) ;
 }
 
+/* Open StateEditor
+ */
 void StateDisplayer::launchEditor () {
     m_ed->close() ;
     m_ed->show() ;
+    m_ed->move(200, 500) ;
 }
 
+/* Doesn't actually delete the StateEditor, merely hides it.
+ */
 void StateDisplayer::delEd () {
     m_lcdSig->display(m_Stt[0]->getSig(m_l)) ;
     m_lcdS->display(m_Stt[0]->getS(m_l)) ;
