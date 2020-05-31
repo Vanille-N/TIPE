@@ -1,5 +1,9 @@
 #include "stateplot.h"
 
+/* The StatePlot shows a series of states on a temperature-salinity diagram.
+ * Density is shown as a color gradient in the background with a legend on
+ * the right.
+ */
 StatePlot::StatePlot (QVector<State *> & Stt, QVector<Const *> & Cst, QWidget * parent) {
     setParent(parent) ;
     m_Stt = Stt ;
@@ -109,40 +113,6 @@ void StatePlot::setup() {
         cp->replot() ;
     }
 }
-
-//inline double dPhi (double phi) {
-//    return (phi >= 0 ? 1 : -1 );
-//}
-
-//inline double sq (double x) {
-//    return x*x ;
-//}
-
-//inline double dAlpha (double phi, double beta, double delta) {
-//    return (phi + delta*beta/(delta + std::abs(phi))) * dPhi(phi)
-//         + (1 + std::abs(phi)) * (1 - (beta*delta)/(sq(delta + std::abs(phi))) * dPhi(phi)) ;
-//}
-
-//double itermin (QList<QVector<double>> iter) {
-//    double m = 1e100 ;
-//    foreach (QVector<double> vec, iter) {
-//        for (int i = vec.size()-1; i >= 0; i--) {
-//            m = std::min(vec[i], m) ;
-//        }
-
-//    }
-//    return m ;
-//}
-
-//double itermax (QList<QVector<double>> iter) {
-//    double m = -1e100 ;
-//    foreach (QVector<double> vec, iter) {
-//        for (int i = vec.size()-1; i >= 0; i--) {
-//            m = std::max(vec[i], m) ;
-//        }
-//    }
-//    return m ;
-//}
 
 void StatePlot::dataSlot () {
     for (int K = 0; K < NB_POINTS; K++) {
