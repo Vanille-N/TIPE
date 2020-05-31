@@ -1,5 +1,10 @@
 #include "state.h"
 
+/* A State records the current value of non-constant parameters.
+ * These include the temperature and salinity in both boxes, as well as
+ * other quantities that are calculated from these (flow in particular)
+ */
+
 State::State() {
     S[equator] = 0.0 ;
     T[equator] = 0.0 ;
@@ -13,6 +18,9 @@ State::State() {
     read("_default_.stt") ;
 }
 
+/* Initialize from external file.
+ * Do not modify State::write() without updating State::read
+ */
 void State::read (QString input) {
     QFile f (input) ;
     if (!f.open(QIODevice::ReadOnly)) return ;
@@ -26,6 +34,8 @@ void State::read (QString input) {
     Sig[pole] = 0.0 ;
 }
 
+/* Save current state to external file.
+ */
 void State::write (QString output) {
     QFile f (output) ;
     if (!f.open(QIODevice::WriteOnly)) return ;
@@ -37,6 +47,11 @@ void State::write (QString output) {
     data << phi ;
 }
 
+/* Getters & Setters
+ * The State object itself has no knowledge of how to calculate any of these
+ * quantities, meaning that setters have to be provided for all variables.
+ * Calculations are done by a Calculator.
+ */
 double State::getAlpha () { return alpha ; }
 double State::getBeta () { return beta ; }
 double State::getDelta () { return delta ; }
