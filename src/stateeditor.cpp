@@ -1,5 +1,10 @@
 #include "stateeditor.h"
 
+/* A StateEditor is able to modify the value of a state.
+ * It is the only way the user can override the results of calculations and
+ * place the simulated system in a state that would otherwise not be possible
+ * (apart from deciphering and rewriting the binary data for .cst and .stt files)
+ */
 StateEditor::StateEditor(QVector<State *> & Stt, loc l, QString param, QWidget * parent) {
     m_Stt = Stt ;
     m_l = l ;
@@ -9,6 +14,7 @@ StateEditor::StateEditor(QVector<State *> & Stt, loc l, QString param, QWidget *
     m_vbox = new QVBoxLayout ;
     m_hbox = new QHBoxLayout ;
 
+    // Left half is responsible for editing the salinity of one box
     m_Sbox = new QVBoxLayout ;
     m_lcdS = new QLCDNumber(this) ;
     m_lcdS->setStyleSheet("background-color: black;") ;
@@ -44,6 +50,7 @@ StateEditor::StateEditor(QVector<State *> & Stt, loc l, QString param, QWidget *
     m_Sbox->addWidget(m_lcdS) ;
     m_Sbox->addLayout(m_buttonsS) ;
 
+    // Right side is responsible for editing the temperature of one box
     m_Tbox = new QVBoxLayout ;
     m_lcdT = new QLCDNumber(this) ;
     m_lcdT->setStyleSheet("background-color: black;") ;
