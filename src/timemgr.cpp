@@ -1,5 +1,10 @@
 #include "timemgr.h"
 
+/* The TimeMgr is the visible display of the internal clock of the simulation.
+ * It is the single button labeled 'TIME' in the control panel.
+ * Note that TimeMgr is _not_ the timer responsible for periodically pinging
+ * the other elements.
+ */
 TimeMgr::TimeMgr (QWidget * parent, Const * Cst) {
     TIME = 0.0 ;
     setFixedSize(70, 70) ;
@@ -29,7 +34,6 @@ TimeMgr::TimeMgr (QWidget * parent, Const * Cst) {
 void TimeMgr::tick () {
     TIME += m_Cst->get(dt) ;
     m_lcd->display(TIME) ;
-    timeout() ;
 }
 
 double TimeMgr::clock () {
