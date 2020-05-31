@@ -180,10 +180,10 @@ LayoutSelector::LayoutSelector (QWidget * win) {
      */
 
     lvD->addWidget(rDa) ;
-    rDa->setStyleSheet("background-color: orange;") ;
+    rDa->setStyleSheet("background-color: blue;") ;
     rDa->setFixedSize(L, U+D+10) ;
     lvD->addWidget(rDb) ;
-    rDb->setStyleSheet("background-color: blue;") ;
+    rDb->setStyleSheet("background-color: orange;") ;
     rDb->setFixedSize(R, U+D+10) ;
 
     /*
