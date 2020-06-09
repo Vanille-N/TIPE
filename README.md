@@ -1,5 +1,7 @@
 # TIPE
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Simulation de la circulation thermohaline
 
 ```diff
