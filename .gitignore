@@ -5,3 +5,4 @@ local-*
 *.o
 moc_*
 _*_.txt
+.gitnuke
