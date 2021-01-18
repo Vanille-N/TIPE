@@ -6,7 +6,8 @@
 
 ```diff
 ! NOTE
-As this is a school project, an english version is neither available nor scheduled anytime soon. The code however is commented in english.
+As this is a school project, an english version is neither available nor scheduled anytime soon.
+The code however is commented in english.
 ```
 
 ```diff
